@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#0f1115</color>
+    <color name="card">#171a21</color>
+    <color name="line">#262b36</color>
+    <color name="txt">#e6e9ef</color>
+    <color name="dim">#8b93a5</color>
+    <color name="acc">#4f8cff</color>
+    <color name="ok">#39d98a</color>
+    <color name="err">#ff5c5c</color>
+    <color name="warn">#ffb020</color>
+    <color name="tag_v_bg">#1e3a5f</color>
+    <color name="tag_v_fg">#8ab4f8</color>
+    <color name="tag_a_bg">#1e4a34</color>
+    <color name="tag_a_fg">#7ee2b0</color>
+    <color name="tag_u_bg">#3d3320</color>
+    <color name="tag_u_fg">#e8c07d</color>
+    <color name="chip_bg">#1b2029</color>
+    <color name="chip_active_bg">#1a2436</color>
+    <color name="log_bg">#12151c</color>
+    <color name="result_bg">#14301f</color>
+    <color name="result_border">#245c39</color>
+    <color name="btn_alt_bg">#3d2018</color>
+    <color name="btn_disabled_bg">#232833</color>
+</resources>
