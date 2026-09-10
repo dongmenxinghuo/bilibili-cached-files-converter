@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg">
+
+    <!-- 顶部标题 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="28dp"
+        android:paddingBottom="16dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="bottom">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B站缓存工具箱"
+                android:textColor="@color/txt"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  v1.0"
+                android:textColor="@color/dim"
+                android:textSize="13sp"
+                android:paddingBottom="3dp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shizuku 提权 · 一键扫描 · 批量合并转码"
+            android:textColor="@color/dim"
+            android:textSize="13sp"
+            android:paddingTop="4dp" />
+
+        <TextView
+            android:id="@+id/statusTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Shizuku：检测中…"
+            android:textColor="@color/dim"
+            android:textSize="12sp"
+            android:paddingTop="8dp" />
+    </LinearLayout>
+
+    <!-- Tab 行 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <LinearLayout
+            android:id="@+id/tabMerge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="14dp"
+            android:paddingStart="0dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/tabMergeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="扫描 &amp; 合并"
+                android:textColor="@color/acc"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:paddingTop="10dp"
+                android:paddingBottom="8dp" />
+
+            <View
+                android:id="@+id/tabMergeIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/acc" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tabTranscode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="14dp"
+            android:paddingEnd="0dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/tabTranscodeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="转码 HEVC → H.264"
+                android:textColor="@color/dim"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:paddingTop="10dp"
+                android:paddingBottom="8dp" />
+
+            <View
+                android:id="@+id/tabTranscodeIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line" />
+
+    <!-- 面板容器 -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- ============ Panel 1: 扫描 & 合并 ============ -->
+        <ScrollView
+            android:id="@+id/panelMerge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Shizuku 状态卡 -->
+                <LinearLayout
+                    android:id="@+id/shizukuCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Step 1 · 授权 Shizuku"
+                        android:textColor="@color/txt"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="用 Shizuku 借 shell 权限，才能读 B 站缓存的私有目录"
+                        android:textColor="@color/dim"
+                        android:textSize="12sp"
+                        android:paddingTop="4dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="10dp">
+
+                        <Button
+                            android:id="@+id/authBtn"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_btn_primary"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="授权 Shizuku"
+                            android:textAllCaps="false"
+                            android:textColor="@color/txt"
+                            android:textSize="13sp"
+                            android:stateListAnimator="@null" />
+
+                        <Button
+                            android:id="@+id/scanBtn"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/bg_btn_primary"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="扫描缓存"
+                            android:textAllCaps="false"
+                            android:textColor="@color/txt"
+                            android:textSize="13sp"
+                            android:enabled="false"
+                            android:stateListAnimator="@null" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 扫描进度 -->
+                <ProgressBar
+                    android:id="@+id/scanProgress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/acc"
+                    android:visibility="gone" />
+
+                <!-- 文件列表容器 -->
+                <LinearLayout
+                    android:id="@+id/filesContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp" />
+
+                <!-- 空列表提示 -->
+                <TextView
+                    android:id="@+id/emptyHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="扫描后会在这里显示所有 B 站缓存视频"
+                    android:textColor="@color/dim"
+                    android:textSize="13sp"
+                    android:gravity="center"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="24dp" />
+
+                <!-- 开始处理按钮 -->
+                <Button
+                    android:id="@+id/processBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bg_btn_primary"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="开始处理（合并 + 转码）"
+                    android:textAllCaps="false"
+                    android:textColor="@color/txt"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:enabled="false"
+                    android:stateListAnimator="@null" />
+
+                <!-- 进度 -->
+                <ProgressBar
+                    android:id="@+id/processProgress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:progressTint="@color/acc"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/processStage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dim"
+                    android:textSize="12sp"
+                    android:paddingTop="4dp"
+                    android:visibility="gone" />
+
+                <!-- 日志 -->
+                <TextView
+                    android:id="@+id/mergeLog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_log"
+                    android:fontFamily="monospace"
+                    android:padding="10dp"
+                    android:textColor="#9aa4b5"
+                    android:textSize="11sp"
+                    android:lineSpacingExtra="2dp"
+                    android:visibility="gone" />
+
+                <!-- 结果 -->
+                <LinearLayout
+                    android:id="@+id/mergeResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- ============ Panel 2: 转码 ============ -->
+        <ScrollView
+            android:id="@+id/panelTranscode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:visibility="gone"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- 说明卡 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="把 HEVC 视频转成 H.264"
+                        android:textColor="@color/txt"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="用 Media3 调用手机硬件编码器，速度快且不耗流量"
+                        android:textColor="@color/dim"
+                        android:textSize="12sp"
+                        android:paddingTop="4dp" />
+
+                    <Button
+                        android:id="@+id/transcodePickBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_btn_primary"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="选择 MP4 文件"
+                        android:textAllCaps="false"
+                        android:textColor="@color/txt"
+                        android:textSize="13sp"
+                        android:stateListAnimator="@null" />
+
+                    <TextView
+                        android:id="@+id/transcodeFileTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="未选择文件"
+                        android:textColor="@color/dim"
+                        android:textSize="12sp"
+                        android:paddingTop="8dp" />
+                </LinearLayout>
+
+                <!-- 画质 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="输出画质"
+                    android:textColor="@color/dim"
+                    android:textSize="12sp"
+                    android:paddingTop="16dp" />
+
+                <LinearLayout
+                    android:id="@+id/qualityGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="6dp">
+
+                    <TextView
+                        android:id="@+id/qHigh"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_chip"
+                        android:gravity="center"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="高"
+                        android:textColor="@color/dim"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/qMid"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_chip"
+                        android:gravity="center"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="平衡"
+                        android:textColor="@color/dim"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/qLow"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_chip"
+                        android:gravity="center"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="小体积"
+                        android:textColor="@color/dim"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- 输出名 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="输出文件名（留空则自动）"
+                    android:textColor="@color/dim"
+                    android:textSize="12sp"
+                    android:paddingTop="16dp" />
+
+                <EditText
+                    android:id="@+id/transcodeOutName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_card"
+                    android:hint="例如 video_h264.mp4"
+                    android:padding="11dp"
+                    android:textColor="@color/txt"
+                    android:textColorHint="@color/dim"
+                    android:textSize="13sp"
+                    android:inputType="text" />
+
+                <!-- 开始按钮 -->
+                <Button
+                    android:id="@+id/transcodeGoBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_btn_primary"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="开始转码"
+                    android:textAllCaps="false"
+                    android:textColor="@color/txt"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:enabled="false"
+                    android:stateListAnimator="@null" />
+
+                <!-- 进度 -->
+                <ProgressBar
+                    android:id="@+id/transcodeProgress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:progressTint="@color/acc"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/transcodeStage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dim"
+                    android:textSize="12sp"
+                    android:paddingTop="4dp"
+                    android:visibility="gone" />
+
+                <!-- 日志 -->
+                <TextView
+                    android:id="@+id/transcodeLog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_log"
+                    android:fontFamily="monospace"
+                    android:padding="10dp"
+                    android:textColor="#9aa4b5"
+                    android:textSize="11sp"
+                    android:lineSpacingExtra="2dp"
+                    android:visibility="gone" />
+
+                <!-- 结果 -->
+                <LinearLayout
+                    android:id="@+id/transcodeResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp" />
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+</LinearLayout>
